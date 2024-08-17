@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { PasswordStrengthComponent } from './password-strength/password-strength.component'
-import { NgModel } from '@angular/forms'; // Ensure to import NgModel if necessary
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CustomPasswordInputComponent } from './components/custom-password-input/custom-password-input.component';
+import { PasswordStrengthIndicatorComponent } from './components/password-strength-indicator/password-strength-indicator.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, PasswordStrengthComponent],
-
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  imports: [ReactiveFormsModule, CustomPasswordInputComponent, PasswordStrengthIndicatorComponent]
 })
 export class AppComponent {
-  title = 'password-strength-app';
+  form: FormGroup;
+
+  constructor() {
+    this.form = new FormGroup({
+      password: new FormControl('')
+    });
+  }
 }
